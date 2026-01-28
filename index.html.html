@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi SEO YUN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- 기본 설정 --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #ededed;
+            font-family: 'Noto Sans KR', sans-serif;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .page-section {
+    width: 100%;
+    height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    position: relative;
+    
+    /* 플렉스 박스 설정: 컨텐츠를 바닥으로 밀어냄 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* 핵심: 이미지를 하단에 고정 */
+    align-items: center;       /* 가로 중앙 정렬 */
+    background-color: #ededed;
+}
+
+        /* 섹션 내 이미지 스타일 (메인페이지와 동일하게) */
+        .page-section img {
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 100vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        header {
+    display: grid;
+    /* 왼쪽(로고), 중앙(네비), 오른쪽(컨택트) 비율을 동일하게 맞춤 */
+    grid-template-columns: 1fr 1050px 1fr; 
+    height: 120px;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(237, 237, 237, 0.9);
+}
+        .logo-area {
+    display: flex;
+    justify-content: center; /* 그리드 칸 안에서 가로 중앙 */
+    align-items: center;
+}
+
+.logo-area img {
+    width: 33px;
+    height: auto;
+    margin-left: 0; /* 첫 번째 코드에 있던 margin-left: 0px를 명시적으로 제거 */
+    display: block;
+}
+        nav { width: 100%; display: flex; justify-content: flex-end; }
+        nav ul { 
+            display: flex; 
+            list-style: none; 
+            gap: 40px; 
+            padding-right: 50px; 
+        }
+        nav ul li a { text-decoration: none; color: #333; font-size: 16px; font-weight: 500; }
+
+        .contact-area { display: flex; justify-content: flex-start; position: relative;
+        margin-left: 80px;}
+        .contact-btn {
+            width: 250px; background: #1a1a1a; color: #fff; height: 50px;
+            border-radius: 15px; border: none; font-size: 16px; font-weight: 700;
+            cursor: pointer; display: flex; justify-content: center; align-items: center;
+
+        }
+        .contact-tooltip {
+            position: absolute; top: 55px; left: 0; width: 220px;
+            background: rgba(255, 255, 255, 0.95); border-radius: 12px; padding: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); z-index: 100; display: none;
+            text-align: center; color: #333;
+        }
+        .contact-area:hover .contact-tooltip { display: block; }
+
+        /* --- [1페이지] 이미지 수동 위치 조절 --- */
+
+
+        /* --- [1페이지] 하단 정렬 설정 --- */
+#page1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    background-color: #ededed;      
+}
+
+#page1 .img-main {
+    object-fit: contain;
+    position: relative;   
+    width: auto;
+    height: auto;              
+    max-width: 100%;           
+    max-height: 100%;         
+}           
+#page3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* 바닥으로 밀착 */
+    align-items: center;       /* 가로 중앙 정렬 */
+}
+
+#page3 .bg-img {
+    display: block;            /* 하단 미세 공백 제거 */
+    width: auto;               /* 가로세로 비율 유지 */
+    max-width: 100%;           /* 화면 너비에 맞춤 */
+    max-height: 90vh;          /* 화면 높이를 초과하지 않도록 제한 */
+}
+        /* --- 서브 페이지 02 (슬라이더) --- */
+        .sub-page-02 { background-color: #ededed; display: flex; justify-content: center; align-items: center; }
+        .portfolio-container { width: 100%; max-width: 1800px; display: flex; align-items: center; justify-content: center; gap: 50px; }
+        .portfolio-info { flex: 0 0 320px; }
+        .portfolio-list-wrapper { position: relative; display: flex; align-items: center; width: 1380px; }
+        .portfolio-track-container { width: 1300px; overflow: hidden; margin: 0 auto; }
+        .portfolio-track { display: flex; gap: 20px; transition: transform 0.5s ease; padding: 30px 0; }
+        .portfolio-item { flex: 0 0 420px; height: 550px; border-radius: 40px; overflow: hidden; background: #fff; box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; }
+        .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; background: #000; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 10; }
+        .arrow-left { left: -10px; } .arrow-right { right: -10px; }
+        .nav-arrow svg { width: 20px; height: 20px; stroke: #f15a24; stroke-width: 3; fill: none; }
+
+        /* 3페이지를 버튼의 기준점으로 설정 */
+.sub-page-03 {
+    position: relative;
+}
+
+/* 버튼들을 감싸는 컨테이너 (이미지 크기에 맞춤) */
+.hover-map-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 1920px; /* 이미지의 원본 가로 크기에 맞추세요 */
+    height: 100%;
+}
+
+/* 개별 호버 버튼 공통 스타일 */
+.map-link {
+    position: absolute;
+    display: block;
+    background: rgba(255, 255, 255, 0); /* 처음엔 투명 */
+    transition: all 0.3s ease;
+    cursor: pointer; /* 마우스 커서가 손가락 모양으로 변경됨 */
+    border: 2px solid transparent;
+}
+
+/* 마우스를 올렸을 때 (호버 효과) */
+.map-link:hover {
+    background: rgba(255, 255, 255, 0.2); /* 살짝 밝아짐 */
+    border: 2px solid #f15a24; /* 포인트 컬러 테두리 */
+}
+
+/* 주신 좌표 기반 위치 설정 (이미지 1920px 기준 퍼센트 계산) */
+.link1 { top: 15.6%; left: 80.1%; width: 14%; height: 3.2%; }
+.link2 { top: 34.2%; left: 80.1%; width: 14%; height: 4.8%; }
+.link3 { top: 54.5%; left: 80.1%; width: 14%; height: 4.8%; }
+.link4 { top: 74.9%; left: 80.1%; width: 14%; height: 4.4%; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area"><img src="images/강서윤로고완성.png" alt="Logo"></div>
+        <nav>
+            <ul>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="index_01website.html">My design</a></li>
+                <li><a href="index.html">Main page</a></li>
+            </ul>
+        </nav>
+        <div class="contact-area">
+            <button class="contact-btn">Contact</button>
+            <div class="contact-tooltip">
+                <p>010-9402-7186</p>
+                <span>prosthetistkang@naver.com</span>
+            </div>
+        </div>
+    </header>
+
+    <div id="page1" class="page-section">
+        <img src="images/main.png" alt="문어" class="img-main">
+
+    </div>
+
+    <section id="page2" class="page-section sub-page-02">
+        <div class="portfolio-container">
+            <div class="portfolio-info">
+                <h3>PORTFOLIO</h3>
+                <h4>UNBOXING<br>NEW IDENTITY</h4>
+                <p class="sub-desc">HARMONIZING BOLD VISUALS WITH USER-CENTRIC INTERFACE DESIGN</p>
+            </div>
+            <div class="portfolio-list-wrapper">
+                <div class="nav-arrow arrow-left"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></div>
+                <div class="portfolio-track-container">
+                    <div class="portfolio-track">
+                        <div class="portfolio-item"><img src="images/01.png"></div>
+                        <div class="portfolio-item"><img src="images/02.png"></div>
+                        <div class="portfolio-item"><img src="images/03.png"></div>
+                        <div class="portfolio-item"><img src="images/04.png"></div>
+                        <div class="portfolio-item"><img src="images/05.png"></div>
+                        <div class="portfolio-item"><img src="images/06.png"></div>
+                    </div>
+                </div>
+                <div class="nav-arrow arrow-right"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="page3" class="page-section sub-page-03">
+    <img src="images/서브3-1.png" alt="자기소개" class="bg-img" usemap="#link-map">
+
+    <map name="link-map">
+        <area target="_blank" alt="Resume" title="Resume" href="resume.html#page2" coords="1539,156,1807,187" shape="rect">
+        
+        <area target="_blank" alt="Portfolio" title="Portfolio" href="resume.html#page3" coords="1539,342,1808,390" shape="rect">
+        
+        <area target="_blank" alt="Instagram" title="Instagram" href="resume.html#page4" coords="1539,545,1808,593" shape="rect">
+        
+        <area target="_blank" alt="Blog" title="Blog" href="resume.html#page5" coords="1539,749,1808,793" shape="rect">
+    </map>
+</section>
+</body>
+<script>
+    // 1. 브라우저의 자동 스크롤 복원 기능을 수동(manual)으로 설정
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+
+    // 2. 페이지 로드 시 맨 위로 이동
+    window.onload = function() {
+        setTimeout(function() {
+            window.scrollTo(0, 0);
+        }, 10); // 아주 짧은 지연 시간을 주어 확실히 맨 위로 보냅니다.
+    };
+    // 1. 새로고침 시 맨 위로 이동
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    window.onload = function() {
+        setTimeout(function() {
+            window.scrollTo(0, 0);
+        }, 10);
+    };
+
+    // 2. 슬라이더 기능
+    const track = document.querySelector('.portfolio-track');
+    const prevBtn = document.querySelector('.arrow-left');
+    const nextBtn = document.querySelector('.arrow-right');
+    const items = document.querySelectorAll('.portfolio-item');
+    
+    let index = 0;
+    const totalItems = items.length;
+    const itemWidth = 440; // 이미지 너비(420) + 간격(20)
+    const displayCount = 3; // 한 화면에 보일 이미지 개수 (필요에 따라 조절)
+    const maxIndex = totalItems - 1; 
+
+    // 슬라이드 이동 함수
+    function updateSlide() {
+        track.style.transform = `translateX(-${index * itemWidth}px)`;
+    }
+
+    // 다음 버튼
+    nextBtn.addEventListener('click', () => {
+        if (index < maxIndex) {
+            index++;
+        } else {
+            index = 0; // 마지막이면 처음으로
+        }
+        updateSlide();
+        resetTimer(); // 클릭하면 타이머 초기화
+    });
+
+    // 이전 버튼
+    prevBtn.addEventListener('click', () => {
+        if (index > 0) {
+            index--;
+        } else {
+            index = maxIndex; // 처음이면 마지막으로
+        }
+        updateSlide();
+        resetTimer();
+    });
+
+    // 3. 자동 슬라이드 (3초마다)
+    let autoSlide = setInterval(() => {
+        if (index < maxIndex) {
+            index++;
+        } else {
+            index = 0;
+        }
+        updateSlide();
+    }, 3000);
+
+    // 사용자가 버튼을 클릭했을 때 자동 슬라이드가 꼬이지 않게 리셋하는 함수
+    function resetTimer() {
+        clearInterval(autoSlide);
+        autoSlide = setInterval(() => {
+            if (index < maxIndex) {
+                index++;
+            } else {
+                index = 0;
+            }
+            updateSlide();
+        }, 3000);
+    }
+    
+</script>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - SEO YUN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- 기본 설정 --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #ededed;
+            font-family: 'Noto Sans KR', sans-serif;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* --- [수정] 모든 페이지 섹션 공통 스타일 (메인/서브와 일치) --- */
+/* --- 1. 페이지 섹션 레이아웃 (하단 밀착형) --- */
+.page-section {
+    width: 100%;
+    height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    position: relative;
+    overflow: hidden;
+    
+    /* 플렉스 박스 설정: 컨텐츠를 바닥으로 밀어냄 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* 핵심: 이미지를 하단에 고정 */
+    align-items: center;       /* 가로 중앙 정렬 */
+    background-color: #ededed;
+}
+
+        /* 섹션 내 이미지 스타일 (메인페이지와 동일하게) */
+        .page-section img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- 헤더 스타일 --- */
+        header {
+            display: grid;
+            grid-template-columns: 1fr 1050px 1fr; 
+            height: 120px;
+            align-items: center;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(237, 237, 237, 0.9);
+        }
+
+        .logo-area { display: flex; justify-content: center; align-items: center; }
+        .logo-area img { width: 33px; height: auto; display: block; }
+
+        nav { width: 100%; display: flex; justify-content: flex-end; }
+        nav ul { 
+            display: flex; 
+            list-style: none; 
+            gap: 40px; 
+            padding-right: 50px; 
+        }
+        nav ul li a { text-decoration: none; color: #333; font-size: 16px; font-weight: 500; }
+
+        .contact-area { display: flex; justify-content: flex-start; position: relative; margin-left: 80px;}
+        .contact-btn {
+            width: 250px; background: #1a1a1a; color: #fff; height: 50px;
+            border-radius: 15px; border: none; font-size: 16px; font-weight: 700;
+            cursor: pointer; display: flex; justify-content: center; align-items: center;
+        }
+        .contact-tooltip {
+            position: absolute; top: 55px; left: 0; width: 220px;
+            background: rgba(255, 255, 255, 0.95); border-radius: 12px; padding: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); z-index: 100; display: none;
+            text-align: center; color: #333;
+        }
+        .contact-area:hover .contact-tooltip { display: block; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <a href="index.html"><img src="images/강서윤로고완성.png" alt="Logo"></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="index_01website.html">My design</a></li>
+                <li><a href="index.html">Main page</a></li>
+            </ul>
+        </nav>
+        <div class="contact-area">
+            <button class="contact-btn">Contact</button>
+            <div class="contact-tooltip">
+                <p>010-9402-7186</p>
+                <span>prosthetistkang@naver.com</span>
+            </div>
+        </div>
+    </header>
+
+    <section id="page1" class="page-section">
+        <img src="images/self1.jpg" alt="information">
+    </section>
+
+    <section id="page2" class="page-section">
+        <img src="images/self2.jpg" alt="성장과정">
+    </section>
+
+    <section id="page3" class="page-section">
+        <img src="images/self3.jpg" alt="성장과정2">
+    </section>
+
+    <section id="page4" class="page-section">
+        <img src="images/self4.jpg" alt="성장과정4">
+    </section>
+
+    <section id="page5" class="page-section">
+        <img src="images/self5.jpg" alt="성장과정5">
+    </section>
+
+    <script>
+        // 1. 새로고침 및 해시(#) 처리
+        window.onload = function() {
+            if (!window.location.hash) {
+                setTimeout(function() {
+                    window.scrollTo(0, 0);
+                }, 10);
+            }
+        };
+
+        // 자동 스크롤 복원 끔
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+    </script>
+</body>
+</html>
