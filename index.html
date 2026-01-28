@@ -117,7 +117,21 @@
     height: auto;              
     max-width: 100%;           
     max-height: 100%;         
-}           
+}
+/* 1페이지 클릭 영역 스타일 */
+.main-click-link {
+    position: absolute;
+    /* 좌표 계산: (x / 전체너비) * 100 */
+    left: 81.25%;   /* 1560 / 1920 */
+    top: 13.9%;     /* 139 / 1000 (이미지 세로 높이에 따라 조절) */
+    width: 13.4%;   /* (1818-1560) / 1920 */
+    height: 58.8%;  /* (727-139) / 1000 */
+    
+    background: rgba(255, 255, 255, 0); /* 평소엔 투명 */
+    transition: background 0.3s;
+    z-index: 10;
+}
+
 #page3 {
     display: flex;
     flex-direction: column;
@@ -204,10 +218,11 @@
     </header>
 
     <div id="page1" class="page-section">
+    <div style="position: relative; display: inline-block;">
         <img src="images/main.png" alt="문어" class="img-main">
-
+        <a href="resume/resume.html" target="_blank" class="main-click-link"></a>
     </div>
-
+</div>
     <section id="page2" class="page-section sub-page-02">
         <div class="portfolio-container">
             <div class="portfolio-info">
