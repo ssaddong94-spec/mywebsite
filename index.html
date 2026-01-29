@@ -24,6 +24,7 @@
             overflow-x: hidden;
         }
 
+        /* --- 헤더 스타일 --- */
         header {
             display: grid;
             grid-template-columns: 1fr 1050px 1fr; 
@@ -39,7 +40,7 @@
 
         .logo-area { display: flex; justify-content: center; align-items: center; }
         .logo-area img { width: 33px; height: auto; display: block; }
-        
+
         nav { width: 100%; display: flex; justify-content: flex-end; }
         nav ul { display: flex; list-style: none; gap: 40px; padding-right: 50px; }
         nav ul li a { text-decoration: none; color: #333; font-size: 16px; font-weight: 500; }
@@ -59,6 +60,7 @@
         .contact-tooltip span { font-size: 12px; }
         .contact-area:hover .contact-tooltip { display: block; }
 
+        /* --- 공통 섹션 스타일 --- */
         .page-section {
             width: 100%;
             height: 100vh;
@@ -71,16 +73,91 @@
             background-color: #ededed;
         }
 
-        .page-section img {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
+       /* --- 1페이지 (비율 고정형) 스타일 --- */
+#page1 { 
+    overflow: hidden; 
+    position: relative;
+}
+        /* 배경 이미지 */
+        #page1 img[usemap] {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            width: 100%;
             height: auto;
-            display: block;
             object-fit: contain;
         }
 
-        /* --- 슬라이더 섹션 (2페이지 전용) --- */
+        /* 문어 그룹 컨테이너 */
+        .octopus-group {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .octopus-group img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* --- 개별 부위 설정 --- */
+
+        .octopus-group .body { 
+            z-index: 5; 
+            width: 25%; 
+            animation: floating 3.5s ease-in-out infinite;
+        }
+
+        .octopus-group .leg-top { 
+            z-index: 2; 
+            width: 8%;
+            margin-top: -170px;
+            margin-left: -30px;
+            animation: leg-floating 4s ease-in-out infinite; 
+        }
+
+        .octopus-group .leg-bot { 
+            z-index: 2; 
+            width: 8%; 
+            margin-top: 150px; 
+            margin-left: -20px;
+            animation: leg-floating 3.8s ease-in-out infinite reverse;
+        }
+
+        .octopus-group .music { 
+            z-index: 6; 
+            width: 2%; 
+            margin-top: -10px; 
+            margin-left: -300px;
+            animation: floating 3.2s ease-in-out infinite;
+        }
+
+        /* --- 애니메이션 정의 --- */
+
+        /* 기본 위아래 (몸통, 음표용) */
+        @keyframes floating {
+            0% { transform: translate(-50%, -55%); }
+            50% { transform: translate(-50%, -45%); }
+            100% { transform: translate(-50%, -55%); }
+        }
+
+        /* 다리 전용 (위아래 + 좌우 대각선 살랑살랑) */
+        @keyframes leg-floating {
+            0% { transform: translate(-50%, -55%) rotate(0deg); }
+            50% { transform: translate(-40%, -43%) rotate(8deg); }
+            100% { transform: translate(-50%, -55%) rotate(0deg); }
+        }
+
+        /* --- 2페이지 (슬라이더) --- */
         .portfolio-container { 
             width: 95%; max-width: 1800px; 
             display: flex; align-items: center; justify-content: center; gap: 30px; 
@@ -90,49 +167,31 @@
         .portfolio-track { display: flex; gap: 20px; transition: transform 0.5s ease; padding: 30px 0; }
         .portfolio-item { flex: 0 0 calc(33.333% - 20px); aspect-ratio: 3 / 4; border-radius: 40px; overflow: hidden; background: #fff; box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
         .portfolio-item img { width: 100%; height: 100%; object-fit: cover; }
-        
+
         .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; background: #000; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 10; }
         .arrow-left { left: -20px; } .arrow-right { right: -20px; }
         .nav-arrow svg { width: 20px; height: 20px; stroke: #f15a24; stroke-width: 3; fill: none; }
-        /* 3페이지 컨테이너 설정 */
-.octopus-page {
-    position: relative;
-    overflow: hidden;
-}
 
-/* 배경 이미지 레이어 */
-.bg-layer {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    width: 100%;
-    height: auto;
-}
+        /* --- 3페이지 (서브) --- */
+        .octopus-page { position: relative; overflow: hidden; }
 
-/* 문어 이미지 레이어 (둥둥 뜨는 효과) */
-.octopus-layer {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    /* 배경 이미지 내 문어 위치에 맞춰 조정하세요 */
-    transform: translate(-50%, -55%); 
-    z-index: 2;
-    width: 40%; /* 문어 크기 조절 */
-    height: auto;
-    pointer-events: none; /* 클릭 이벤트가 배경 이미지맵에 전달되도록 설정 */
-    
-    /* 애니메이션 적용 */
-    animation: floating 3s ease-in-out infinite;
-}
+        .bg-layer {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            width: 100%; height: auto;
+        }
 
-/* 둥둥 뜨는 애니메이션 정의 */
-@keyframes floating {
-    0% { transform: translate(-50%, -55%); }
-    50% { transform: translate(-50%, -50%); } /* 5% 정도 아래로 이동 */
-    100% { transform: translate(-50%, -55%); }
-}
+        .octopus-layer {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -55%); 
+            z-index: 2;
+            width: 40%; height: auto;
+            pointer-events: none;
+            animation: floating 3s ease-in-out infinite;
+        }
     </style>
 </head>
 <body>
@@ -156,7 +215,15 @@
     </header>
 
     <div id="page1" class="page-section">
-        <img src="images/main.png" usemap="#mainmap" alt="Main">
+        <img src="images/seabackground.png" usemap="#mainmap" alt="Main background">
+        
+        <div class="octopus-group">
+            <img src="images/octopustopleg.png" class="leg-top" alt="leg">
+            <img src="images/octopusbotleg.png" class="leg-bot" alt="leg">
+            <img src="images/octopus1.png" class="body" alt="octopus1">
+            <img src="images/music.png" class="music" alt="music">
+        </div>
+        
         <map name="mainmap">
             <area shape="rect" coords="1560,128,1820,673" href="resume/resume.html">
         </map>
@@ -187,38 +254,36 @@
     </section>
 
     <section id="page3" class="page-section octopus-page">
-    <img src="images/서브3.png" class="bg-layer" usemap="#submap3" alt="배경">
-    
-    <img src="images/02.암석문어첼로.png" class="octopus-layer" alt="문어">
+        <img src="images/서브3.png" class="bg-layer" usemap="#submap3" alt="배경">
+        <img src="images/02.암석문어첼로.png" class="octopus-layer" alt="문어">
 
-    <map name="submap3">
-        <area shape="rect" coords="1530,137,1809,193" href="resume/resume.html#page2">
-        <area shape="rect" coords="1537,353,1803,393" href="resume/resume.html#page3">
-        <area shape="rect" coords="1534,537,1803,593" href="resume/resume.html#page4">
-        <area shape="rect" coords="1534,739,1803,795" href="resume/resume.html#page5">
-    </map>
-</section>
+        <map name="submap3">
+            <area shape="rect" coords="1530,137,1809,193" href="resume/resume.html#page2">
+            <area shape="rect" coords="1537,353,1803,393" href="resume/resume.html#page3">
+            <area shape="rect" coords="1534,537,1803,593" href="resume/resume.html#page4">
+            <area shape="rect" coords="1534,739,1803,795" href="resume/resume.html#page5">
+        </map>
+    </section>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-rwdImageMaps/1.6/jquery.rwdImageMaps.min.js"></script>
     <script>
         $(document).ready(function() {
-            // 반응형 이미지맵 활성화
             $('img[usemap]').rwdImageMaps();
         });
 
-        // 초기화
         if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
         window.onload = function() { setTimeout(() => window.scrollTo(0, 0), 10); };
 
-        // 2페이지 슬라이더 로직
         const track = document.querySelector('.portfolio-track');
         const items = document.querySelectorAll('.portfolio-item');
         let index = 0;
 
         function updateSlide() {
-            const itemWidth = items[0].offsetWidth + 20; 
-            track.style.transform = `translateX(-${index * itemWidth}px)`;
+            if (items.length > 0) {
+                const itemWidth = items[0].offsetWidth + 20; 
+                track.style.transform = `translateX(-${index * itemWidth}px)`;
+            }
         }
 
         $('.arrow-right').click(function() {
