@@ -14,6 +14,7 @@
         html {
             scroll-snap-type: y mandatory;
             scroll-behavior: smooth;
+            background-color: #ededed;
         }
 
         body {
@@ -21,19 +22,6 @@
             font-family: 'Noto Sans KR', sans-serif;
             width: 100%;
             overflow-x: hidden;
-        }
-
-        .page-section {
-            width: 100%;
-            height: 100vh;
-            scroll-snap-align: start;
-            scroll-snap-stop: always;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            background-color: #ededed;
         }
 
         header {
@@ -46,6 +34,7 @@
             top: 0;
             z-index: 1000;
             background-color: rgba(237, 237, 237, 0.9);
+            backdrop-filter: blur(5px);
         }
 
         .logo-area { display: flex; justify-content: center; align-items: center; }
@@ -69,92 +58,41 @@
         }
         .contact-area:hover .contact-tooltip { display: block; }
 
-        /* --- [1페이지] 반응형 클릭 영역 설정 --- */
-        #page1 { justify-content: center; }
-        .main-container {
+        .page-section {
+            width: 100%;
+            height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
             position: relative;
-            display: inline-block;
-            max-width: 100%;
-            max-height: 100vh;
-        }
-        .img-main {
-            display: block;
-            width: auto;
-            max-width: 100%;
-            max-height: 100vh;
-            object-fit: contain;
-        }
-        /* 마우스 올리면 나타날 영역 (반응형 %) */
-        .main-link-overlay {
-            position: absolute;
-            left: 81.2%; /* 가로 위치 % */
-            top: 12.8%;  /* 세로 위치 % */
-            width: 13.5%; /* 가로 크기 % */
-            height: 54.5%; /* 세로 크기 % */
-            background: rgba(255, 0, 0, 0); /* 테스트 시 0.3으로 바꿔보세요 */
-            cursor: pointer;
-            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ededed;
         }
 
-        /* --- [2페이지] 반응형 슬라이더 --- */
-        .sub-page-02 { background-color: #ededed; }
+        .page-section img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* --- 슬라이더 섹션 (2페이지 전용) --- */
         .portfolio-container { 
-            width: 95%; 
-            max-width: 1800px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 30px; 
+            width: 95%; max-width: 1800px; 
+            display: flex; align-items: center; justify-content: center; gap: 30px; 
         }
-        .portfolio-info { flex: 0 0 250px; }
-        .portfolio-list-wrapper { 
-            position: relative; 
-            display: flex; 
-            align-items: center; 
-            flex: 1; 
-            max-width: 1300px; 
-        }
+        .portfolio-list-wrapper { position: relative; flex: 1; max-width: 1300px; display: flex; align-items: center; }
         .portfolio-track-container { width: 100%; overflow: hidden; }
         .portfolio-track { display: flex; gap: 20px; transition: transform 0.5s ease; padding: 30px 0; }
-        
-        /* 아이템 크기를 화면에 비례하게 수정 */
-        .portfolio-item { 
-            flex: 0 0 calc(33.333% - 20px); /* 한 화면에 3개 기준 */
-            aspect-ratio: 3 / 4; 
-            min-width: 280px;
-            border-radius: 40px; 
-            overflow: hidden; 
-            background: #fff; 
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
-        }
+        .portfolio-item { flex: 0 0 calc(33.333% - 20px); aspect-ratio: 3 / 4; border-radius: 40px; overflow: hidden; background: #fff; box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
         .portfolio-item img { width: 100%; height: 100%; object-fit: cover; }
         
         .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; background: #000; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 10; }
         .arrow-left { left: -20px; } .arrow-right { right: -20px; }
         .nav-arrow svg { width: 20px; height: 20px; stroke: #f15a24; stroke-width: 3; fill: none; }
-
-        /* --- [3페이지] --- */
-        #page3 { justify-content: flex-end; }
-        #page3 .bg-img { display: block; width: auto; max-width: 100%; max-height: 90vh; }
-        .sub-page-03 { position: relative; }
-        
-        /* 3페이지 링크 영역 (반응형) */
-        .map-link-container {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            height: 90vh; /* 이미지 높이에 맞춤 */
-        }
-        .map-link { position: absolute; background: rgba(255, 255, 255, 0); transition: all 0.3s ease; cursor: pointer; border: 2px solid transparent; }
-        .map-link:hover { background: rgba(255, 255, 255, 0.2); border: 2px solid #f15a24; }
-        
-        /* 3페이지 좌표들 */
-        .link1 { top: 15.6%; left: 80.1%; width: 14%; height: 4%; }
-        .link2 { top: 34.2%; left: 80.1%; width: 14%; height: 5%; }
-        .link3 { top: 54.5%; left: 80.1%; width: 14%; height: 5%; }
-        .link4 { top: 74.9%; left: 80.1%; width: 14%; height: 5%; }
     </style>
 </head>
 <body>
@@ -178,18 +116,18 @@
     </header>
 
     <div id="page1" class="page-section">
-        <div class="main-container">
-            <img src="images/main.png" alt="문어" class="img-main">
-            <a href="resume/resume.html" target="_blank" class="main-link-overlay"></a>
-        </div>
+        <img src="images/main.png" usemap="#mainmap" alt="Main">
+        <map name="mainmap">
+            <area shape="rect" coords="1560,128,1820,673" href="resume/resume.html">
+        </map>
     </div>
 
-    <section id="page2" class="page-section sub-page-02">
+    <section id="page2" class="page-section">
         <div class="portfolio-container">
-            <div class="portfolio-info">
+            <div class="portfolio-info" style="flex: 0 0 250px;">
                 <h3>PORTFOLIO</h3>
                 <h4>UNBOXING<br>NEW IDENTITY</h4>
-                <p class="sub-desc">HARMONIZING BOLD VISUALS WITH USER-CENTRIC INTERFACE DESIGN</p>
+                <p>HARMONIZING BOLD VISUALS WITH USER-CENTRIC INTERFACE DESIGN</p>
             </div>
             <div class="portfolio-list-wrapper">
                 <div class="nav-arrow arrow-left"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></div>
@@ -208,66 +146,49 @@
         </div>
     </section>
 
-    <section id="page3" class="page-section sub-page-03">
-        <div style="position: relative; display: inline-block;">
-            <img src="images/서브3-1.png" alt="자기소개" class="bg-img">
-            <a href="resume.html#page2" target="_blank" class="map-link link1"></a>
-            <a href="resume.html#page3" target="_blank" class="map-link link2"></a>
-            <a href="resume.html#page4" target="_blank" class="map-link link3"></a>
-            <a href="resume.html#page5" target="_blank" class="map-link link4"></a>
-        </div>
+    <section id="page3" class="page-section">
+        <img src="images/서브3-1.png" usemap="#submap3" alt="자기소개">
+        <map name="submap3">
+            <area shape="rect" coords="1530,137,1809,193" href="resume/resume.html#page2">
+            <area shape="rect" coords="1537,353,1803,393" href="resume/resume.html#page3">
+            <area shape="rect" coords="1534,537,1803,593" href="resume/resume.html#page4">
+            <area shape="rect" coords="1534,739,1803,795" href="resume/resume.html#page5">
+        </map>
     </section>
 
-<script>
-    // 1. 초기화 및 상단 이동
-    if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
-    window.onload = function() {
-        setTimeout(() => window.scrollTo(0, 0), 10);
-    };
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-rwdImageMaps/1.6/jquery.rwdImageMaps.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 반응형 이미지맵 활성화
+            $('img[usemap]').rwdImageMaps();
+        });
 
-    // 2. 슬라이더 기능 (반응형 대응)
-    const track = document.querySelector('.portfolio-track');
-    const prevBtn = document.querySelector('.arrow-left');
-    const nextBtn = document.querySelector('.arrow-right');
-    const items = document.querySelectorAll('.portfolio-item');
-    
-    let index = 0;
-    const totalItems = items.length;
+        // 초기화
+        if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+        window.onload = function() { setTimeout(() => window.scrollTo(0, 0), 10); };
 
-    function updateSlide() {
-        // 현재 아이템 하나당 너비(gap 포함)를 계산해서 이동
-        const itemWidth = items[0].offsetWidth + 20; 
-        track.style.transform = `translateX(-${index * itemWidth}px)`;
-    }
+        // 2페이지 슬라이더 로직
+        const track = document.querySelector('.portfolio-track');
+        const items = document.querySelectorAll('.portfolio-item');
+        let index = 0;
 
-    nextBtn.addEventListener('click', () => {
-        index = (index < totalItems - 1) ? index + 1 : 0;
-        updateSlide();
-        resetTimer();
-    });
+        function updateSlide() {
+            const itemWidth = items[0].offsetWidth + 20; 
+            track.style.transform = `translateX(-${index * itemWidth}px)`;
+        }
 
-    prevBtn.addEventListener('click', () => {
-        index = (index > 0) ? index - 1 : totalItems - 1;
-        updateSlide();
-        resetTimer();
-    });
-
-    // 화면 크기 변할 때 슬라이드 위치 재조정
-    window.addEventListener('resize', updateSlide);
-
-    // 3. 자동 슬라이드
-    let autoSlide = setInterval(() => {
-        index = (index < totalItems - 1) ? index + 1 : 0;
-        updateSlide();
-    }, 3000);
-
-    function resetTimer() {
-        clearInterval(autoSlide);
-        autoSlide = setInterval(() => {
-            index = (index < totalItems - 1) ? index + 1 : 0;
+        $('.arrow-right').click(function() {
+            index = (index < items.length - 3) ? index + 1 : 0;
             updateSlide();
-        }, 3000);
-    }
-</script>
+        });
+
+        $('.arrow-left').click(function() {
+            index = (index > 0) ? index - 1 : items.length - 3;
+            updateSlide();
+        });
+
+        $(window).on('resize', updateSlide);
+    </script>
 </body>
 </html>
