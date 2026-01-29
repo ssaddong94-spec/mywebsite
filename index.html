@@ -94,6 +94,45 @@
         .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; background: #000; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 10; }
         .arrow-left { left: -20px; } .arrow-right { right: -20px; }
         .nav-arrow svg { width: 20px; height: 20px; stroke: #f15a24; stroke-width: 3; fill: none; }
+        /* 3페이지 컨테이너 설정 */
+.octopus-page {
+    position: relative;
+    overflow: hidden;
+}
+
+/* 배경 이미지 레이어 */
+.bg-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 100%;
+    height: auto;
+}
+
+/* 문어 이미지 레이어 (둥둥 뜨는 효과) */
+.octopus-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* 배경 이미지 내 문어 위치에 맞춰 조정하세요 */
+    transform: translate(-50%, -55%); 
+    z-index: 2;
+    width: 40%; /* 문어 크기 조절 */
+    height: auto;
+    pointer-events: none; /* 클릭 이벤트가 배경 이미지맵에 전달되도록 설정 */
+    
+    /* 애니메이션 적용 */
+    animation: floating 3s ease-in-out infinite;
+}
+
+/* 둥둥 뜨는 애니메이션 정의 */
+@keyframes floating {
+    0% { transform: translate(-50%, -55%); }
+    50% { transform: translate(-50%, -50%); } /* 5% 정도 아래로 이동 */
+    100% { transform: translate(-50%, -55%); }
+}
     </style>
 </head>
 <body>
@@ -147,15 +186,18 @@
         </div>
     </section>
 
-    <section id="page3" class="page-section">
-        <img src="images/서브3-1.png" usemap="#submap3" alt="자기소개">
-        <map name="submap3">
-            <area shape="rect" coords="1530,137,1809,193" href="resume/resume.html#page2">
-            <area shape="rect" coords="1537,353,1803,393" href="resume/resume.html#page3">
-            <area shape="rect" coords="1534,537,1803,593" href="resume/resume.html#page4">
-            <area shape="rect" coords="1534,739,1803,795" href="resume/resume.html#page5">
-        </map>
-    </section>
+    <section id="page3" class="page-section octopus-page">
+    <img src="images/서브3.png" class="bg-layer" usemap="#submap3" alt="배경">
+    
+    <img src="images/02.암석문어첼로.png" class="octopus-layer" alt="문어">
+
+    <map name="submap3">
+        <area shape="rect" coords="1530,137,1809,193" href="resume/resume.html#page2">
+        <area shape="rect" coords="1537,353,1803,393" href="resume/resume.html#page3">
+        <area shape="rect" coords="1534,537,1803,593" href="resume/resume.html#page4">
+        <area shape="rect" coords="1534,739,1803,795" href="resume/resume.html#page5">
+    </map>
+</section>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-rwdImageMaps/1.6/jquery.rwdImageMaps.min.js"></script>
