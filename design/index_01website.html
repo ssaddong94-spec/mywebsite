@@ -90,28 +90,41 @@
     position: fixed; 
     z-index: 2000;
     left: 0; top: 0; 
-    width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* 배경을 더 어둡게 */
     backdrop-filter: blur(10px);
     
-    /* 긴 이미지 스크롤을 위해 필수 */
+    /* 세로 스크롤 활성화 */
     overflow-y: auto; 
-    align-items: flex-start; /* 이미지가 위에서부터 시작되도록 */
-    justify-content: center;
+    overflow-x: hidden;
 }
 .modal-content {
     display: block;
-    margin: auto;           /* 중앙 배치 */
-    width: auto;            /* 가로 비율 유지 */
-    max-width: 90%;         /* 가로가 화면의 90%를 넘지 않게 */
-    max-height: 90vh;       /* 세로가 화면 높이의 80%를 넘지 않게 (크기 줄임 핵심) */
-    object-fit: contain;    /* 비율 깨짐 방지 */
+    margin: 60px auto;      /* 상하 여백을 주어 테두리가 잘 보이게 함 */
+    width: 900px;           /* 이미지가 보여질 큰 너비 (자유롭게 조절 가능) */
+    max-width: 95%;         /* 화면이 작아지면 자동으로 줄어듦 */
+    
+    /* 테두리 및 그림자 효과 */
+    border: 6px solid #ffffff; 
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    background-color: #ffffff;
+    
+    /* 높이 제한 해제 (이미지가 길게 나오도록 함) */
+    height: auto;
+    max-height: none; 
 }
-        .close-btn {
-            position: fixed; top: 30px; right: 50px;
-            color: #fff; font-size: 60px; font-weight: 200;
-            cursor: pointer; z-index: 3000; line-height: 1; transition: 0.3s;
-        }
+    .close-btn {
+    position: fixed; 
+    top: 20px; 
+    right: 40px;
+    color: #fff; 
+    font-size: 50px; 
+    font-weight: 300;
+    cursor: pointer; 
+    z-index: 3000;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
         .close-btn:hover { color: #f15a24; transform: rotate(90deg); }
         .modal::-webkit-scrollbar { display: none; }
     </style>
@@ -144,6 +157,7 @@
             <map name="map1">
                 <area shape="rect" coords="671,352,827,404" href="javascript:void(0);" onclick="openModal('modal1')">
                 <area shape="rect" coords="420,344,662,413" href="website/index.html" target="_blank">
+                <area shape="rect" coords="1561,154,1816,752" href="/resume/resume.html" target="_blank">
             </map>
         </div>
 
@@ -240,15 +254,14 @@
         // --- 모달 함수 ---
         function openModal(id) {
     const modal = document.getElementById(id);
-    modal.style.display = "flex"; // "block"에서 "flex"로 변경
-    isScrolling = true; 
+    modal.style.display = "block"; 
+    document.body.style.overflow = "hidden"; // 메인 스크롤 방지
 }
 
-        function closeModal(id) {
-            document.getElementById(id).style.display = "none";
-            isScrolling = false;
-        }
-
+function closeModal(id) {
+    document.getElementById(id).style.display = "none";
+    document.body.style.overflow = "auto"; // 메인 스크롤 복구
+}
         window.onkeydown = function(event) {
             if (event.keyCode == 27) {
                 const modals = document.getElementsByClassName('modal');
