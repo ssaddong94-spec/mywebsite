@@ -6,24 +6,30 @@
     <title>Hi SEO YUN - Portfolio</title>
     
     <link rel="icon" href="images/강서윤로고완성.png" type="image/png">
-    
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        /* --- 1. 기본 초기화 및 원페이지 스크롤 설정 --- */
+        /* --- 1. 기본 초기화 및 스크롤 설정 --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        html, body { 
-            height: 100%; 
-            overflow: hidden; /* JS 제어를 위해 기본 스크롤바 숨김 */
+        html {
+            scroll-behavior: smooth;
             background-color: #ededed;
-            font-family: 'Noto Sans KR', sans-serif;
         }
 
-        /* --- 헤더 스타일 (고정) --- */
+        body { 
+            background-color: #ededed;
+            font-family: 'Noto Sans KR', sans-serif;
+            width: 100%;
+            /* 스크롤바가 보이도록 설정 */
+            overflow-y: scroll; 
+            overflow-x: hidden;
+        }
+
+        /* --- 헤더 스타일 --- */
         header {
             display: grid;
             grid-template-columns: 1fr 1050px 1fr; 
-            height: 100px; /* 높이 약간 조절 */
+            height: 100px;
             align-items: center;
             width: 100%;
             position: fixed;
@@ -37,12 +43,7 @@
         .logo-area img { width: 33px; height: auto; display: block; }
 
         nav { width: 100%; display: flex; justify-content: flex-end; }
-        nav ul { 
-            display: flex; 
-            list-style: none; 
-            gap: 40px; 
-            padding-right: 50px; 
-        }
+        nav ul { display: flex; list-style: none; gap: 40px; padding-right: 50px; }
         nav ul li a { text-decoration: none; color: #333; font-size: 16px; font-weight: 500; }
 
         .contact-area { display: flex; justify-content: flex-start; position: relative; margin-left: 80px;}
@@ -62,17 +63,17 @@
         /* --- 원페이지 섹션 스타일 --- */
         #container {
             width: 100%;
-            height: 100%;
-            transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1)
+            /* transform 이동 대신 실제 스크롤을 사용하기 위해 transition 제거 가능 */
         }
 
         .page-section {
             width: 100%;
-            height: 100vh; /* 화면 꽉 채우기 */
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
+            background-color: #ededed;
         }
 
         .page-section img {
@@ -80,53 +81,61 @@
             max-height: 100%;
             width: auto;
             height: auto;
-            object-fit: contain; /* 이미지 비율 유지 */
+            object-fit: contain;
             display: block;
         }
 
-        /* 2. 모달 배경에서 이미지가 수직 중앙에 오도록 설정 */
-.modal {
-    display: none; 
-    position: fixed; 
-    z-index: 2000;
-    left: 0; top: 0; 
-    width: 100%; 
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9); /* 배경을 더 어둡게 */
-    backdrop-filter: blur(10px);
-    
-    /* 세로 스크롤 활성화 */
-    overflow-y: auto; 
-    overflow-x: hidden;
-}
-.modal-content {
-    display: block;
-    margin: 60px auto;      /* 상하 여백을 주어 테두리가 잘 보이게 함 */
-    width: 900px;           /* 이미지가 보여질 큰 너비 (자유롭게 조절 가능) */
-    max-width: 95%;         /* 화면이 작아지면 자동으로 줄어듦 */
-    
-    /* 테두리 및 그림자 효과 */
-    border: 6px solid #ffffff; 
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    background-color: #ffffff;
-    
-    /* 높이 제한 해제 (이미지가 길게 나오도록 함) */
-    height: auto;
-    max-height: none; 
-}
-    .close-btn {
-    position: fixed; 
-    top: 20px; 
-    right: 40px;
-    color: #fff; 
-    font-size: 50px; 
-    font-weight: 300;
-    cursor: pointer; 
-    z-index: 3000;
-    text-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
+        /* --- 2. 모달 스타일 (스크롤 활성화) --- */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 2000;
+            left: 0; top: 0; 
+            width: 100%; 
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            
+            /* 모달 자체 스크롤바 활성화 */
+            overflow-y: auto; 
+        }
+
+        /* 모달 스크롤바 디자인 (선택사항: 깔끔하게 보이게) */
+        .modal::-webkit-scrollbar {
+            width: 8px;
+        }
+        .modal::-webkit-scrollbar-thumb {
+            background: #f15a24;
+            border-radius: 10px;
+        }
+        .modal::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .modal-content {
+            display: block;
+            margin: 60px auto;
+            width: 900px;
+            max-width: 95%;
+            border: 6px solid #ffffff; 
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            background-color: #ffffff;
+            height: auto;
+        }
+
+        .close-btn {
+            position: fixed; 
+            top: 20px; 
+            right: 40px;
+            color: #fff; 
+            font-size: 50px; 
+            font-weight: 300;
+            cursor: pointer; 
+            z-index: 3000;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transition: 0.3s;
+        }
         .close-btn:hover { color: #f15a24; transform: rotate(90deg); }
-        .modal::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
@@ -229,12 +238,15 @@
         let isScrolling = false;
 
         window.addEventListener('wheel', function(e) {
-            e.preventDefault(); // 기본 스크롤 방지
-            if (isScrolling) return; // 애니메이션 중 중복 스크롤 방지
+            // 모달이 열려있을 때는 메인 스크롤 로직 중단
+            if (document.querySelector('.modal[style*="display: block"]')) return;
 
-            if (e.deltaY > 0) { // 아래로
+            e.preventDefault(); 
+            if (isScrolling) return;
+
+            if (e.deltaY > 0) { 
                 if (currentIdx < totalSections - 1) currentIdx++;
-            } else { // 위로
+            } else { 
                 if (currentIdx > 0) currentIdx--;
             }
 
@@ -243,32 +255,42 @@
 
         function scrollToSection(idx) {
             isScrolling = true;
-            const container = document.getElementById('container');
-            container.style.transform = `translateY(-${idx * 100}vh)`;
+            
+            // 실제 윈도우 스크롤을 이동시켜서 스크롤바가 움직이게 함
+            window.scrollTo({
+                top: sections[idx].offsetTop,
+                behavior: 'smooth'
+            });
 
             setTimeout(() => {
                 isScrolling = false;
-            }, 800); // CSS transition 시간과 맞춤
+            }, 800); 
         }
 
         // --- 모달 함수 ---
         function openModal(id) {
-    const modal = document.getElementById(id);
-    modal.style.display = "block"; 
-    document.body.style.overflow = "hidden"; // 메인 스크롤 방지
-}
+            const modal = document.getElementById(id);
+            modal.style.display = "block"; 
+            // 모달이 뜰 때 배경 body의 스크롤을 완전히 막아 모달 스크롤에만 집중하게 함
+            document.body.style.overflow = "hidden"; 
+        }
 
-function closeModal(id) {
-    document.getElementById(id).style.display = "none";
-    document.body.style.overflow = "auto"; // 메인 스크롤 복구
-}
+        function closeModal(id) {
+            document.getElementById(id).style.display = "none";
+            // 모달 닫으면 다시 스크롤바 활성화
+            document.body.style.overflow = "auto"; 
+            document.body.style.overflowX = "hidden";
+        }
+
+        // ESC 키로 모달 닫기
         window.onkeydown = function(event) {
             if (event.keyCode == 27) {
                 const modals = document.getElementsByClassName('modal');
                 for (let i = 0; i < modals.length; i++) {
-                    modals[i].style.display = "none";
+                    if (modals[i].style.display === "block") {
+                        closeModal(modals[i].id);
+                    }
                 }
-                isScrolling = false;
             }
         };
 
